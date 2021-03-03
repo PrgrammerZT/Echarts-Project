@@ -5,7 +5,7 @@
   // adjust body font size
   function setBodyFontSize() {
     if (document.body) {
-      document.body.style.fontSize = 12 * dpr + "px";
+      document.body.style.fontSize = 40 * dpr + "px";
     } else {
       document.addEventListener("DOMContentLoaded", setBodyFontSize);
     }
@@ -15,6 +15,7 @@
   // set 1rem = viewWidth / 10
   function setRemUnit() {
     var rem = docEl.clientWidth / 24;
+    // console.log(rem);
     docEl.style.fontSize = rem + "px";
   }
 
@@ -22,7 +23,7 @@
 
   // reset rem unit on page resize
   window.addEventListener("resize", setRemUnit);
-  window.addEventListener("pageshow", function(e) {
+  window.addEventListener("pageshow", function (e) {
     if (e.persisted) {
       setRemUnit();
     }
