@@ -318,7 +318,7 @@
       trigger: "axis",
     },
     legend: {
-      data: ["REACT", "VUE"],
+      data: ["VUE", "REACT"],
       top: "0%",
       textStyle: {
         color: "rgba(255,255,255,.5)",
@@ -407,12 +407,9 @@
     ],
     series: [
       {
-        name: "REACT",
+        name: "VUE",
         type: "line",
         smooth: true,
-        lineStyle: {
-          color: "orange",
-        },
         // 设置拐点 小圆点
         symbol: "circle",
         // 拐点大小
@@ -435,11 +432,11 @@
             [
               {
                 offset: 0,
-                color: "rgba(0, 216, 135, 0.4)",
+                color: "orange",
               },
               {
-                offset: 0.8,
-                color: "rgba(0, 216, 135, 0.1)",
+                offset: 1,
+                color: "purple",
               },
             ],
             false
@@ -482,7 +479,7 @@
         ],
       },
       {
-        name: "VUE",
+        name: "REACT",
         type: "line",
         lineStyle: {},
         smooth: true,
@@ -491,32 +488,13 @@
           color: "#0184d5",
           width: 2,
         },
-        // 填充区域
         areaStyle: {
-          // 渐变色，只需要复制即可
-          color: new echarts.graphic.LinearGradient(
-            0,
-            0,
-            0,
-            1,
-            [
-              {
-                offset: 0,
-                color: "rgba(1, 132, 213,0)", // 渐变色的起始颜色
-              },
-              {
-                offset: 0.8,
-                color: "rgba(1, 132, 213,1)", // 渐变线的结束颜色
-              },
-            ],
-            false
-          ),
-          shadowColor: "rgba(0, 0, 0, 0.1)",
+          color: "#000",
         },
         // 设置拐点 小圆点
         symbol: "circle",
         // 拐点大小
-        symbolSize: 8,
+        symbolSize: 5,
         // 设置拐点颜色以及边框
         itemStyle: {
           color: "#0184d5",
@@ -525,11 +503,7 @@
         },
         // 开始不显示拐点， 鼠标经过显示
         showSymbol: false,
-        stack: "总量",
         areaStyle: {},
-        emphasis: {
-          focus: "series",
-        },
         // series  第一个对象data数据
         data: [
           30,
@@ -569,6 +543,120 @@
 
   myChart.setOption(option);
 
+  // 4. 让图表跟随屏幕自动的去适应
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+})();
+
+(function () {
+  const myChart = echarts.init(document.querySelector(".pie .chart"));
+  const option = {
+    color: ["red", "orange", "yellow", "green", "blue"],
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      bottom: "0%",
+      left: "10%",
+      // 小图标的宽度和高度
+      itemWidth: 10,
+      itemHeight: 10,
+      // 修改图例组件的文字为 12px
+      textStyle: {
+        color: "rgba(255,255,255,.5)",
+        fontSize: "12",
+      },
+    },
+    series: [
+      {
+        name: "访问来源",
+        type: "pie",
+        top: 0,
+        center: ["50%", "35%"],
+        radius: ["0%", "60%"],
+        avoidLabelOverlap: false,
+        label: {
+          show: false,
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 1048, name: "5000以下" },
+          { value: 735, name: "5000-10000" },
+          { value: 580, name: "10000-20000" },
+          { value: 484, name: "20000-30000" },
+          { value: 300, name: "40000以上" },
+        ],
+      },
+    ],
+  };
+
+  myChart.setOption(option);
+  // 4. 让图表跟随屏幕自动的去适应
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+})();
+
+(function () {
+  const myChart = echarts.init(document.querySelector(".pie2 .chart"));
+  const option = {
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      bottom: "0%",
+      left: "0%",
+      // 小图标的宽度和高度
+      itemWidth: 10,
+      itemHeight: 10,
+      // 修改图例组件的文字为 12px
+      textStyle: {
+        color: "rgba(255,255,255,.5)",
+        fontSize: "12",
+      },
+    },
+    series: [
+      {
+        type: "pie",
+        color: [
+          "#b4bf5f",
+          "#1e9fff",
+          "#ff5722",
+          "pink",
+          "#009688",
+          "#ffb800",
+          "aqua",
+        ],
+        label: {
+          fontSize: 13,
+        },
+        labelLine: {
+          length: 6,
+          length2: 8,
+        },
+        radius: ["10%", "70%"],
+        center: ["50%", "45%"],
+        roseType: "radius",
+        itemStyle: {
+          borderRadius: 8,
+        },
+        data: [
+          { value: 26, name: "北京" },
+          { value: 24, name: "山东" },
+          { value: 25, name: "河北" },
+          { value: 20, name: "江苏" },
+          { value: 25, name: "浙江" },
+          { value: 30, name: "四川" },
+          { value: 42, name: "湖北" },
+        ],
+      },
+    ],
+  };
+
+  myChart.setOption(option);
   // 4. 让图表跟随屏幕自动的去适应
   window.addEventListener("resize", function () {
     myChart.resize();
